@@ -1,0 +1,11 @@
+import type { ReactNode } from 'react'
+import { Navigate } from 'react-router-dom'
+import { useAppSelector } from '../store/hooks'
+
+export function RequireAuth({ children }: { children: ReactNode }) {
+  const isAuthenticated = useAppSelector((s) => s.auth.isAuthenticated)
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+  return children
+}
